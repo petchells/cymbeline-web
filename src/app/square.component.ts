@@ -9,9 +9,9 @@ export class SquareComponent {
     squareClass = '';
     @Input('x') x: string;
     @Input('y') y: string;
+    map = ['a', 'def', 'sdlkfjas', 'sd', 'we', 'yf', 'ui', 'po', 'wq'];
 
     constructor() {
-        console.log('binding to', this.x, this.y);
     }
 
     clicked(arg): void {

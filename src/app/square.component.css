@@ -1,16 +1,22 @@
+.edge {
+    text-align: center;
+    color: darkorange;
+}
 div.sq {
-    margin: .8em;
+    margin: .4em;
     padding: 1.4em;
     border-radius: 2.2em;
     line-height: 2em;
 }
 .sq.bk {
-    border: 1px solid black;
+    border: 0;
     background: black;
     color: black;
+    transition: background 2s;
 }
 .sq.wt {
-    border: 1px solid #363;
+    border: 0;
     background: white;
     color: white;
+    transition: background 2s;
 }
