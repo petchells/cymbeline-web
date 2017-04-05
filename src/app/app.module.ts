@@ -5,19 +5,20 @@ import { HttpModule } from '@angular/http';
 
 import { AppComponent } from './app.component';
 import { SquareComponent } from './square.component';
+import {BoardService} from './board.service';
 
 @NgModule({
-    declarations: [
-        AppComponent,
-        SquareComponent
-    ],
-    imports: [
-        BrowserModule,
-        FormsModule,
-        HttpModule
-    ],
-    providers: [],
-    bootstrap: [AppComponent]
+	declarations: [
+		AppComponent,
+		SquareComponent
+	],
+	imports: [
+		BrowserModule,
+		FormsModule,
+		HttpModule
+	],
+	providers: [BoardService],
+	bootstrap: [AppComponent]
 })
 export class AppModule {
 }

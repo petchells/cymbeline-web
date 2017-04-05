@@ -2,18 +2,21 @@
     text-align: center;
     color: darkorange;
 }
+
 div.sq {
     margin: .4em;
     padding: 1.4em;
     border-radius: 2.2em;
     line-height: 2em;
 }
+
 .sq.b {
     border: 0;
     background: black;
     color: black;
     transition: background 2s;
 }
+
 .sq.w {
     border: 0;
     background: white;

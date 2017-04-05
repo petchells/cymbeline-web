@@ -1,23 +1,27 @@
 import { Component, Input } from '@angular/core';
-import {BOARD} from './board.service';
+import {BOARD, BoardService} from './board.service';
+import {AppComponent} from './app.component';
 
 @Component({
-    selector: 'app-sq',
-    templateUrl: './square.component.html',
-    styleUrls: ['./square.component.css']
+	selector: 'app-sq',
+	templateUrl: './square.component.html',
+	styleUrls: ['./square.component.css']
 })
 export class SquareComponent {
 
-    @Input('x') x: string;
-    @Input('y') y: string;
+	@Input('x') x: string;
+	@Input('y') y: string;
 
-    constructor() {
-    }
+	b = BOARD;
 
-    clicked(arg): void {
-        if (!this.map[this.x][this.y]) {
-            console.log('clicked square');
-            BOARD[this.x][this.y] = 'b';
-        }
-    }
+	constructor(private parent: AppComponent, private boardService: BoardService) {
+	}
+
+	public clicked(arg): void {
+		if (!BOARD[this.x][this.y]) {
+			console.log('clicked square');
+			BOARD[this.x][this.y] = 'b';
+		}
+		this.boardService.playMove(parseInt(this.x, 10), parseInt(this.y, 10), this.parent.playerColour);
+	}
 }
