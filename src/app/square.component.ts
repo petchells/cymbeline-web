@@ -1,4 +1,5 @@
 import { Component, Input } from '@angular/core';
+import {BOARD} from './board.service';
 
 @Component({
     selector: 'app-sq',
@@ -6,16 +7,17 @@ import { Component, Input } from '@angular/core';
     styleUrls: ['./square.component.css']
 })
 export class SquareComponent {
-    squareClass = '';
+
     @Input('x') x: string;
     @Input('y') y: string;
-    map = ['a', 'def', 'sdlkfjas', 'sd', 'we', 'yf', 'ui', 'po', 'wq'];
 
     constructor() {
     }
 
     clicked(arg): void {
-        this.squareClass = 'bk';
-        console.log('clicked a square', this.x, this.y);
+        if (!this.map[this.x][this.y]) {
+            console.log('clicked square');
+            BOARD[this.x][this.y] = 'b';
+        }
     }
 }
