@@ -3,6 +3,7 @@ import { Http } from '@angular/http';
 import {Observable} from 'rxjs/Rx';
 import {MoveResponse} from './app.types';
 import {PlayerRequest} from './app.types';
+import 'rxjs/add/operator/toPromise';
 
 export const BOARD: string[][] = [
 	['', '', '', '', '', '', '', ''],
