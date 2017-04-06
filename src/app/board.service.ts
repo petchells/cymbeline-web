@@ -1,8 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Http } from '@angular/http';
-import {Observable} from 'rxjs/Rx';
-import {MoveResponse} from './app.types';
-import {PlayerRequest} from './app.types';
+import {MoveRequest, MoveResponse} from './app.types';
 
 export const BOARD: string[][] = [
 	['', '', '', '', '', '', '', ''],
@@ -39,13 +37,14 @@ export class BoardService {
 				}
 			}
 		}
-		const move: PlayerRequest = {
+		const move: MoveRequest = {
 			black: b,
 			white: w,
 			colour,
 			position: BoardService.coordToString(x, y),
 		};
-		return this.http.get('http://localhost:8080')
+		const qs = ['b=', move.black, 'w=', move.white, 'c=', move.colour, 'p=', move.position].join('&');
+		return this.http.get('http://localhost:8080?' + qs)
 			.toPromise()
 			.then(response => response.json().data as MoveResponse)
 			.catch(BoardService.handleError);

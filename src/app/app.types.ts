@@ -10,7 +10,7 @@ export interface ProblemRequest {
 /**
  * Request object representing a board and a piece to play on it.
  */
-export interface PlayerRequest {
+export interface MoveRequest {
 	black: string[]; // "D3", "D4", "D5", ...
 	white: string[];
 	colour: string;
