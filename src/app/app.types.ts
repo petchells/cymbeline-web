@@ -1,5 +1,6 @@
 export interface MoveResponse {
 	turned: string[];
+	validMoves: string;
 }
 export interface ProblemRequest {
 	black: string[]; // "D3", "D4", "D5", ...
@@ -11,8 +12,8 @@ export interface ProblemRequest {
  * Request object representing a board and a piece to play on it.
  */
 export interface MoveRequest {
-	black: string[]; // "D3", "D4", "D5", ...
-	white: string[];
+	black: string; // "D3", "D4", "D5", ...
+	white: string;
 	colour: string;
 	position: string; // e.g. e6
 }

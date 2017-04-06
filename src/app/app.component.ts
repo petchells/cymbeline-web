@@ -10,4 +10,7 @@ export class AppComponent {
 
 	title = 'Cymbeline';
 
+	constructor() {
+		this.playerColour = 'b';
+	}
 }
