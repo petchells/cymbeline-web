@@ -35,6 +35,9 @@
 	</tbody>
 </table>
 <form name="userInputForm">
-	<input type="radio" [(ngModel)]="playerColour" name="playerColour" value="b">Black
-	<input type="radio" [(ngModel)]="playerColour" name="playerColour" value="w">White
+	Choose your colour:
+	<input type="radio" [(ngModel)]="humanColour" name="human" [disabled]="gameInProgress" value="b">Black
+	<input type="radio" [(ngModel)]="humanColour" name="human" [disabled]="gameInProgress" value="w">White
+	<button type="button" (click)="startGame()" [disabled]="gameInProgress">Start game</button>
+	<button type="button" (click)="stopGame()" [disabled]="!gameInProgress">Stop</button>
 </form>

@@ -16,11 +16,11 @@ div.sq {
     transition: background 2s;
 }
 
-.sq.k {
+.sq.bx {
     border: 0;
-    background: darkblue;
+    background: darkorange;
     transition: background 2s;
-    opacity: .4;
+    opacity: .7;
 }
 
 .sq.w {
@@ -28,4 +28,12 @@ div.sq {
     background: white;
     color: white;
     transition: background 2s;
+}
+
+.sq.wx {
+    border: 0;
+    background: lightyellow;
+    color: lightyellow;
+    transition: background 2s;
+    opacity: .7;
 }

@@ -5,7 +5,7 @@ import { HttpModule } from '@angular/http';
 
 import { AppComponent } from './app.component';
 import { SquareComponent } from './square.component';
-import {BoardService} from './board.service';
+import { BoardService } from './board.service';
 
 @NgModule({
 	declarations: [

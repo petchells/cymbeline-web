@@ -2,17 +2,7 @@ import { Injectable } from '@angular/core';
 import { Http } from '@angular/http';
 import {MoveRequest, MoveResponse} from './app.types';
 import 'rxjs/add/operator/toPromise';
-
-export const BOARD: string[][] = [
-	['', '', '', '', '', '', '', ''],
-	['', '', '', '', '', '', '', ''],
-	['', '', '', '', '', '', '', ''],
-	['', '', '', 'b', 'w', '', '', ''],
-	['', '', '', 'w', 'b', '', '', ''],
-	['', '', '', '', '', '', '', ''],
-	['', '', '', '', '', '', '', ''],
-	['', '', '', '', '', '', '', ''],
-];
+import {GameState} from './game';
 
 @Injectable()
 export class BoardService {
@@ -32,6 +22,9 @@ export class BoardService {
 		return {x, y};
 	}
 
+	constructor(private http: Http) {
+	}
+
 	public playMove(x: number, y: number, colour: string): Promise<MoveResponse> {
 		const board = this.boardToStrings();
 		const move: MoveRequest = {
@@ -43,23 +36,17 @@ export class BoardService {
 		const qs = ['b=' + move.black, 'w=' + move.white, 'c=' + move.colour, 'p=' + move.position].join('&');
 		return this.http.get('http://localhost:8080/rpc/playMove?' + qs)
 			.toPromise()
-			.then(response => response.json().data as MoveResponse)
+			.then(response => response.json() as MoveResponse)
 			.catch(BoardService.handleError);
 	}
 
-	public findBestMove(x: number, y: number, colour: string): Promise<MoveResponse> {
-		let qs = '';
+	public findBestMove(colour: string): Promise<MoveResponse> {
+		const board = this.boardToStrings();
+		const qs = ['b=' + board.black, 'w=' + board.white, 'c=' + colour].join('&');
 		return this.http.get('http://localhost:8080/rpc/findBestMove?' + qs)
 			.toPromise()
-			.then(response => response.json().data as MoveResponse)
+			.then(response => response.json() as MoveResponse)
 			.catch(BoardService.handleError);
-	}
-
-	constructor(private http: Http) {
-	}
-
-	private putPiecesOnBoard(black: string, white: string) {
-
 	}
 
 	private boardToStrings(): {black: string, white: string} {
@@ -67,9 +54,9 @@ export class BoardService {
 		let white = '';
 		for (let i = 0; i < 8; i++) {
 			for (let j = 0; j < 8; j++) {
-				if (BOARD[i][j] === 'b') {
+				if (GameState.BOARD[i][j] === 'b') {
 					black += BoardService.coordToString(i, j);
-				} else if (BOARD[i][j] === 'w') {
+				} else if (GameState.BOARD[i][j] === 'w') {
 					white += BoardService.coordToString(i, j);
 				}
 			}
