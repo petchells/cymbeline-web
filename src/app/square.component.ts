@@ -20,8 +20,12 @@ export class SquareComponent {
 	public clicked(arg): void {
 		if (!BOARD[this.x][this.y]) {
 			console.log('clicked square');
-			BOARD[this.x][this.y] = 'b';
+			BOARD[this.x][this.y] = 'k';
 		}
-		this.boardService.playMove(parseInt(this.x, 10), parseInt(this.y, 10), this.parent.playerColour);
+		this.boardService.playMove(parseInt(this.x, 10), parseInt(this.y, 10), this.parent.playerColour).then(
+			(resp: MoveResponse) => {
+				console.log(resp);
+			}
+		);
 	}
 }

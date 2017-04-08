@@ -1,6 +1,6 @@
 export interface MoveResponse {
-	turned: string[];
-	validMoves: string;
+	turned: string;
+	nextValid: string;
 }
 export interface ProblemRequest {
 	black: string[]; // "D3", "D4", "D5", ...

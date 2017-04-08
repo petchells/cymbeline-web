@@ -13,8 +13,14 @@ div.sq {
 .sq.b {
     border: 0;
     background: black;
-    color: black;
     transition: background 2s;
+}
+
+.sq.k {
+    border: 0;
+    background: darkblue;
+    transition: background 2s;
+    opacity: .4;
 }
 
 .sq.w {

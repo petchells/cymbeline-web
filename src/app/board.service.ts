@@ -41,7 +41,7 @@ export class BoardService {
 			position: BoardService.coordToString(x, y),
 		};
 		const qs = ['b=' + move.black, 'w=' + move.white, 'c=' + move.colour, 'p=' + move.position].join('&');
-		return this.http.get('http://localhost:8080/playMove?' + qs)
+		return this.http.get('http://localhost:8080/rpc/playMove?' + qs)
 			.toPromise()
 			.then(response => response.json().data as MoveResponse)
 			.catch(BoardService.handleError);
@@ -49,7 +49,7 @@ export class BoardService {
 
 	public findBestMove(x: number, y: number, colour: string): Promise<MoveResponse> {
 		let qs = '';
-		return this.http.get('http://localhost:8080/findBestMove?' + qs)
+		return this.http.get('http://localhost:8080/rpc/findBestMove?' + qs)
 			.toPromise()
 			.then(response => response.json().data as MoveResponse)
 			.catch(BoardService.handleError);
