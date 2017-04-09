@@ -47,10 +47,12 @@ export class AppComponent {
 			GameState.BOARD[x][y] = this.humanColour + 'x';
 		}
 		this.boardService.playMove(x, y, this.humanColour).then(
-		(data: MoveResponse) => {
+			(data: MoveResponse) => {
 				this.game.putMovesOnBoard(BoardService.coordToString(x, y), data.turned, this.humanColour);
 				if (data.nextValid) {
-					return this.playComputerMove();
+					return setTimeout(() => {
+						this.playComputerMove();
+					}, 3000);
 				} else {
 					this.computerToPlay = false;
 				}
@@ -61,10 +63,10 @@ export class AppComponent {
 	private playComputerMove() {
 		this.boardService.findBestMove(this.computerColour).then(
 			(data: MoveResponse) => {
-			if (data.turned) {
-				this.game.putMovesOnBoard(data.played, data.turned, this.computerColour);
-				this.computerToPlay = false;
-			}
-		});
+				if (data.turned) {
+					this.game.putMovesOnBoard(data.played, data.turned, this.computerColour);
+					this.computerToPlay = false;
+				}
+			});
 	}
 }
