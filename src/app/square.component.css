@@ -1,8 +1,3 @@
-.edge {
-    text-align: center;
-    color: darkorange;
-}
-
 div.sq {
     margin: .4em;
     padding: 1.4em;
@@ -18,7 +13,7 @@ div.sq {
 
 .sq.bx {
     border: 0;
-    background: darkorange;
+    background: rebeccapurple;
     transition: background 2s;
     opacity: .7;
 }
@@ -26,14 +21,12 @@ div.sq {
 .sq.w {
     border: 0;
     background: white;
-    color: white;
     transition: background 2s;
 }
 
 .sq.wx {
     border: 0;
-    background: lightyellow;
-    color: lightyellow;
+    background: lightgrey;
     transition: background 2s;
     opacity: .7;
 }

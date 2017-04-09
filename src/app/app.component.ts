@@ -42,19 +42,20 @@ export class AppComponent {
 		if (!this.gameInProgress || this.computerToPlay) {
 			return;
 		}
-		this.computerToPlay = true;
 		if (!GameState.BOARD[x][y]) {
 			GameState.BOARD[x][y] = this.humanColour + 'x';
 		}
+		this.computerToPlay = true;
 		this.boardService.playMove(x, y, this.humanColour).then(
 			(data: MoveResponse) => {
-				this.game.putMovesOnBoard(BoardService.coordToString(x, y), data.turned, this.humanColour);
-				if (data.nextValid) {
+				if (data.turned) {
+					this.game.putMovesOnBoard(BoardService.coordToString(x, y), data.turned, this.humanColour);
 					return setTimeout(() => {
 						this.playComputerMove();
-					}, 3000);
+					}, 2000);
 				} else {
 					this.computerToPlay = false;
+					GameState.BOARD[x][y] = '';
 				}
 			}
 		);

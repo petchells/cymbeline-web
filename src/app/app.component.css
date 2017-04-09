@@ -36,5 +36,10 @@ th, td {
 }
 
 .sq {
-    background: darkgreen;
+    background: #373;
+}
+
+.edge {
+    text-align: center;
+    min-width: 1.3em;
 }

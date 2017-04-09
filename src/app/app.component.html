@@ -13,13 +13,13 @@
         </td>
     </tr>
     <tr *ngFor="let y of [0, 1, 2, 3, 4, 5, 6, 7]">
-        <td>
+        <td class="edge">
             {{ y+1 }}
         </td>
         <td class="sq" *ngFor="let x of [0, 1, 2, 3, 4, 5, 6, 7]">
             <app-sq x="{{x}}" y="{{y}}"></app-sq>
         </td>
-        <td>
+        <td class="edge">
             {{ y+1 }}
         </td>
     </tr>
