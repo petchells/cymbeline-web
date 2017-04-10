@@ -9,7 +9,7 @@ import {GameState} from './game';
 	styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-	@Input('human') humanColour: string;
+	@Input() humanColour: string;
 
 	public title = 'Cymbeline';
 	public gameInProgress = false;

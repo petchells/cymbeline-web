@@ -1,6 +1,28 @@
 <h1 xmlns="http://www.w3.org/1999/html">
     {{title}}
 </h1>
+<table class="board">
+    <tr>
+        <td class="square">.</td>
+        <td class="square">.</td>
+        <td class="square">.</td>
+        <td class="square">.</td>
+        <td class="square">.</td>
+        <td class="square">.</td>
+        <td class="square">.</td>
+        <td class="square">.</td>
+    </tr>
+    <tr>
+        <td class="square"></td>
+        <td class="square"></td>
+        <td class="square"></td>
+        <td class="square"></td>
+        <td class="square"></td>
+        <td class="square"></td>
+        <td class="square"></td>
+        <td class="square"></td>
+    </tr>
+</table>
 <table>
     <tbody>
     <tr>
@@ -37,8 +59,8 @@
 <div>
     <form name="userInputForm">
         Choose your colour:
-        <input type="radio" [(ngModel)]="humanColour" name="human" [disabled]="gameInProgress" value="b">Black
-        <input type="radio" [(ngModel)]="humanColour" name="human" [disabled]="gameInProgress" value="w">White
+        <input type="radio" [(ngModel)]="humanColour" name="humanColour" [disabled]="gameInProgress" value="b">Black
+        <input type="radio" [(ngModel)]="humanColour" name="humanColour" [disabled]="gameInProgress" value="w">White
         <br>
         <button type="button" (click)="startGame()" [disabled]="gameInProgress">Start game</button>
         <button type="button" (click)="stopGame()" [disabled]="!gameInProgress">Stop</button>
