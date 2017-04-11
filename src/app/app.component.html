@@ -23,7 +23,7 @@
         <td class="square"></td>
     </tr>
 </table>
-<table>
+<table class="brd">
     <tbody>
     <tr>
         <td>
@@ -64,5 +64,15 @@
         <br>
         <button type="button" (click)="startGame()" [disabled]="gameInProgress">Start game</button>
         <button type="button" (click)="stopGame()" [disabled]="!gameInProgress">Stop</button>
+        <span *ngIf="!gameInProgress">Game stopped</span>
+        <span *ngIf="gameInProgress && computerToPlay">Computer to play</span>
+        <span *ngIf="gameInProgress && !computerToPlay">Your turn</span>
     </form>
+</div>
+<div>
+    Black {{ nrBlack }}<br>
+    White {{ nrWhite }}<br>
+    <span *ngIf="humanWins">You won that one</span>
+    <span *ngIf="computerWins">I won</span>
+    <span *ngIf="draw">It's a draw</span>
 </div>

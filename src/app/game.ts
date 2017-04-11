@@ -23,7 +23,7 @@ export class GameState {
 		GameState.BOARD[4][3] = 'w';
 	}
 
-	public putMovesOnBoard(move: string, turned: string, colour: string) {
+	public putMoveOnBoard(move: string, turned: string, colour: string) {
 		let mv = BoardService.stringToCoords(move);
 		if (turned.length) {
 			GameState.BOARD[mv.x][mv.y] = colour;

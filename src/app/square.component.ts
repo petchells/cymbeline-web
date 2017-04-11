@@ -14,7 +14,7 @@ export class SquareComponent {
 	@Input('x') x: string;
 	@Input('y') y: string;
 
-	constructor(private parent: AppComponent) {
+	constructor(public parent: AppComponent) {
 	}
 
 	public clicked(): void {

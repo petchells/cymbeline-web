@@ -1,11 +1,12 @@
-h1, table, form {
+h1, h2, h3, table, form {
     color: #369;
     font-family: Arial, Helvetica, sans-serif;
 }
+h1, h2, h3 {
+    text-align: center;
+}
 h1 {
     font-size: 250%;
-    margin-left: auto;
-    margin-right: auto;
 }
 
 div {
@@ -23,7 +24,6 @@ button, input {
     margin: 1em;
 }
 table.brd {
-    background: #211;
     padding: 1em;
     margin-left: auto;
     margin-right: auto;
@@ -31,7 +31,6 @@ table.brd {
 
 .brd th, .brd td {
     border: 0;
-    color: gray;
     text-align: center;
 }
 
