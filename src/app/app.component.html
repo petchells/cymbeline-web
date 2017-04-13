@@ -1,78 +1,63 @@
 <h1 xmlns="http://www.w3.org/1999/html">
-    {{title}}
+	{{title}}
 </h1>
 <table class="board">
-    <tr>
-        <td class="square">.</td>
-        <td class="square">.</td>
-        <td class="square">.</td>
-        <td class="square">.</td>
-        <td class="square">.</td>
-        <td class="square">.</td>
-        <td class="square">.</td>
-        <td class="square">.</td>
-    </tr>
-    <tr>
-        <td class="square"></td>
-        <td class="square"></td>
-        <td class="square"></td>
-        <td class="square"></td>
-        <td class="square"></td>
-        <td class="square"></td>
-        <td class="square"></td>
-        <td class="square"></td>
-    </tr>
+	<tr *ngFor="let y of [0, 1, 2, 3, 4, 5, 6, 7]">
+		<td class="square" *ngFor="let x of [0, 1, 2, 3, 4, 5, 6, 7]">
+			<app-sq x="{{x}}" y="{{y}}"></app-sq>
+		</td>
+	</tr>
 </table>
 <table class="brd">
-    <tbody>
-    <tr>
-        <td>
-        </td>
-        <td class="edge" *ngFor="let x of ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H']">
-            {{ x }}
-        </td>
-        <td>
-        </td>
-    </tr>
-    <tr *ngFor="let y of [0, 1, 2, 3, 4, 5, 6, 7]">
-        <td class="edge">
-            {{ y+1 }}
-        </td>
-        <td class="sq" *ngFor="let x of [0, 1, 2, 3, 4, 5, 6, 7]">
-            <app-sq x="{{x}}" y="{{y}}"></app-sq>
-        </td>
-        <td class="edge">
-            {{ y+1 }}
-        </td>
-    </tr>
-    <tr>
-        <td>
-        </td>
-        <td class="edge" *ngFor="let x of ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H']">
-            {{ x }}
-        </td>
-        <td>
-        </td>
-    </tr>
-    </tbody>
+	<tbody>
+	<tr>
+		<td>
+		</td>
+		<td class="edge" *ngFor="let x of ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H']">
+			{{ x }}
+		</td>
+		<td>
+		</td>
+	</tr>
+	<tr *ngFor="let y of [0, 1, 2, 3, 4, 5, 6, 7]">
+		<td class="edge">
+			{{ y+1 }}
+		</td>
+		<td class="sq" *ngFor="let x of [0, 1, 2, 3, 4, 5, 6, 7]">
+			<app-sq x="{{x}}" y="{{y}}"></app-sq>
+		</td>
+		<td class="edge">
+			{{ y+1 }}
+		</td>
+	</tr>
+	<tr>
+		<td>
+		</td>
+		<td class="edge" *ngFor="let x of ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H']">
+			{{ x }}
+		</td>
+		<td>
+		</td>
+	</tr>
+	</tbody>
 </table>
 <div>
-    <form name="userInputForm">
-        Choose your colour:
-        <input type="radio" [(ngModel)]="humanColour" name="humanColour" [disabled]="gameInProgress" value="b">Black
-        <input type="radio" [(ngModel)]="humanColour" name="humanColour" [disabled]="gameInProgress" value="w">White
-        <br>
-        <button type="button" (click)="startGame()" [disabled]="gameInProgress">Start game</button>
-        <button type="button" (click)="stopGame()" [disabled]="!gameInProgress">Stop</button>
-        <span *ngIf="!gameInProgress">Game stopped</span>
-        <span *ngIf="gameInProgress && computerToPlay">Computer to play</span>
-        <span *ngIf="gameInProgress && !computerToPlay">Your turn</span>
-    </form>
+	<form name="userInputForm">
+		Choose your colour:
+		<input type="radio" [(ngModel)]="humanColour" name="humanColour" [disabled]="gameInProgress" value="b">Black
+		<input type="radio" [(ngModel)]="humanColour" name="humanColour" [disabled]="gameInProgress" value="w">White
+		<br>
+		<button type="button" (click)="startGame()" [disabled]="gameInProgress">Start game</button>
+		<button type="button" (click)="stopGame()" [disabled]="!gameInProgress">Stop</button>
+		<span *ngIf="!gameInProgress">Game stopped</span>
+		<span *ngIf="gameInProgress && computerToPlay">Computer to play</span>
+		<span *ngIf="gameInProgress && !computerToPlay">Your turn</span>
+	</form>
 </div>
 <div>
-    Black {{ nrBlack }}<br>
-    White {{ nrWhite }}<br>
-    <span *ngIf="humanWins">You won that one</span>
-    <span *ngIf="computerWins">I won</span>
-    <span *ngIf="draw">It's a draw</span>
+	Black {{ nrBlack }}<br>
+	White {{ nrWhite }}<br>
+	<span *ngIf="humanWins">You won that one</span>
+	<span *ngIf="computerWins">I won</span>
+	<span *ngIf="draw">It's a draw</span>
 </div>
