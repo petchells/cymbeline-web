@@ -1,34 +1,23 @@
 div.sq {
-    width: 65px;
-    height: 65px;
+    width: 64px;
+    height: 64px;
+    background-size: 58px;
+    background-repeat: no-repeat;
+    transition: background 2s;
 }
 
 .sq.b {
     background-image: url('../assets/Reversi-Piece-Black.svg');
-    background-repeat: no-repeat;
-    background-size: 60px;
-    border: 0;
-    transition: background 2s;
 }
 
 .sq.bx {
-    border: 0;
-    background: rebeccapurple;
-    transition: background 2s;
     opacity: .7;
 }
 
 .sq.w {
     background-image: url('../assets/Reversi-Piece-White.svg');
-    background-repeat: no-repeat;
-    background-size: 60px;
-    border: 0;
-    transition: background 2s;
 }
 
 .sq.wx {
-    border: 0;
-    background: lightgrey;
-    transition: background 2s;
     opacity: .7;
 }

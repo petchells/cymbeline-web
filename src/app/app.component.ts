@@ -24,7 +24,6 @@ export class AppComponent {
 	public game = new GameState();
 	public board = GameState.BOARD;
 
-	private couldntGo = true;
 	private nextValid = '';
 
 	constructor(private boardService: BoardService) {
@@ -50,16 +49,16 @@ export class AppComponent {
 		if (!this.gameInProgress || this.computerToPlay) {
 			return;
 		}
-		if (!GameState.BOARD[x][y]) {
-			GameState.BOARD[x][y] = this.humanColour + 'x';
+		if (GameState.BOARD[x][y]) {
+			return;
 		}
+		GameState.BOARD[x][y] = this.humanColour + 'x';
 		this.computerToPlay = true;
 		this.boardService.playMove(x, y, this.humanColour).then(
 			(data: MoveResponse) => {
 				if (data.turned) {
 					this.game.putMoveOnBoard(BoardService.coordToString(x, y), data.turned, this.humanColour);
 					this.updateCounter();
-					this.couldntGo = false;
 					return setTimeout(() => {
 						this.playComputerMove();
 					}, 2000);
@@ -77,14 +76,13 @@ export class AppComponent {
 				if (data.turned) {
 					this.game.putMoveOnBoard(data.played, data.turned, this.computerColour);
 					this.updateCounter();
-					this.computerToPlay = false;
 				} else if (!this.nextValid) {
 					// End of game
 					this.gameInProgress = false;
 					this.showWinner();
-				} else {
-					this.computerToPlay = false;
+					return;
 				}
+				this.computerToPlay = false;
 				this.nextValid = data.nextValid;
 				if (!data.nextValid) {
 					this.playComputerMove();

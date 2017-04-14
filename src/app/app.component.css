@@ -38,19 +38,30 @@ table.brd {
     background: #373;
 }
 
-.edge {
-    text-align: center;
-    min-width: 1.3em;
-}
-
 table.board {
-    width: 600px;
-    height: 600px;
     background-image: url('../assets/Reversi-Board-only.svg');
-    background-size: 600px;
+    background-size: 554px;
+    margin: 0;
+    padding: 0;
+    border: 0;
+    margin-left: auto;
+    margin-right: auto;
 }
-
+table.board tr {
+    margin: 0;
+    padding: 0;
+    border: 0;
+}
 table.board td {
-    width: 12.5%;
     background: transparent;
+    margin: 0;
+    padding: 0px;
+    border: 0;
+}
+table.board td.edge {
+    width: 12px;
+    height: 12px;
+    margin: 0;
+    padding: 0;
+    border: 0;
 }
