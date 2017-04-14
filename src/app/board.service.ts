@@ -22,11 +22,26 @@ export class BoardService {
 		return {x, y};
 	}
 
+	static boardToStrings(): {black: string, white: string} {
+		let black = '';
+		let white = '';
+		for (let i = 0; i < 8; i++) {
+			for (let j = 0; j < 8; j++) {
+				if (GameState.BOARD[i][j] === 'b') {
+					black += BoardService.coordToString(i, j);
+				} else if (GameState.BOARD[i][j] === 'w') {
+					white += BoardService.coordToString(i, j);
+				}
+			}
+		}
+		return {black, white};
+	}
+
 	constructor(private http: Http) {
 	}
 
 	public playMove(x: number, y: number, colour: string): Promise<MoveResponse> {
-		const board = this.boardToStrings();
+		const board = BoardService.boardToStrings();
 		const move: MoveRequest = {
 			black: board.black,
 			white: board.white,
@@ -41,27 +56,12 @@ export class BoardService {
 	}
 
 	public findBestMove(colour: string): Promise<MoveResponse> {
-		const board = this.boardToStrings();
+		const board = BoardService.boardToStrings();
 		const qs = ['b=' + board.black, 'w=' + board.white, 'c=' + colour].join('&');
 		return this.http.get('http://localhost:8080/rpc/findBestMove?' + qs)
 			.toPromise()
 			.then(response => response.json() as MoveResponse)
 			.catch(BoardService.handleError);
-	}
-
-	private boardToStrings(): {black: string, white: string} {
-		let black = '';
-		let white = '';
-		for (let i = 0; i < 8; i++) {
-			for (let j = 0; j < 8; j++) {
-				if (GameState.BOARD[i][j] === 'b') {
-					black += BoardService.coordToString(i, j);
-				} else if (GameState.BOARD[i][j] === 'w') {
-					white += BoardService.coordToString(i, j);
-				}
-			}
-		}
-		return {black, white};
 	}
 
 }

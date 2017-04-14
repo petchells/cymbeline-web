@@ -1,34 +1,3 @@
-h1, h2, h3, table, form {
-    color: #369;
-    font-family: Arial, Helvetica, sans-serif;
-}
-h1, h2, h3 {
-    text-align: center;
-}
-h1 {
-    font-size: 250%;
-}
-
-div {
-    width: 50%;
-    margin-left: auto;
-    margin-right: auto;
-}
-
-form {
-    margin: 1em;
-    text-align: center;
-}
-
-button, input {
-    margin: 1em;
-}
-table.brd {
-    padding: 1em;
-    margin-left: auto;
-    margin-right: auto;
-}
-
 .brd th, .brd td {
     border: 0;
     text-align: center;
@@ -41,6 +10,7 @@ table.brd {
 table.board {
     background-image: url('../assets/Reversi-Board-only.svg');
     background-size: 554px;
+    background-repeat: no-repeat;
     margin: 0;
     padding: 0;
     border: 0;
@@ -59,8 +29,8 @@ table.board td {
     border: 0;
 }
 table.board td.edge {
-    width: 12px;
-    height: 12px;
+    width: 11px;
+    height: 11px;
     margin: 0;
     padding: 0;
     border: 0;

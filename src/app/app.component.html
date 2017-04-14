@@ -52,8 +52,8 @@
 <div>
 	<form name="userInputForm">
 		Choose your colour:
-		<input type="radio" [(ngModel)]="humanColour" name="humanColour" [disabled]="gameInProgress" value="b">Black
-		<input type="radio" [(ngModel)]="humanColour" name="humanColour" [disabled]="gameInProgress" value="w">White
+		<md-radio-button (clicked)="humanColour = 'b'" name="humanColour" [disabled]="gameInProgress" value="b">Black</md-radio-button>
+		<md-radio-button (clicked)="humanColour = 'w'" name="humanColour" [disabled]="gameInProgress" value="w">White</md-radio-button>
 		<br>
 		<button type="button" (click)="startGame()" [disabled]="gameInProgress">Start game</button>
 		<button type="button" (click)="stopGame()" [disabled]="!gameInProgress">Stop</button>
@@ -62,10 +62,29 @@
 		<span *ngIf="gameInProgress && !computerToPlay">Your turn</span>
 	</form>
 </div>
-<div>
+<div class="score">
 	Black {{ nrBlack }}<br>
 	White {{ nrWhite }}<br>
 	<span *ngIf="humanWins">You won that one</span>
 	<span *ngIf="computerWins">I won</span>
 	<span *ngIf="draw">It's a draw</span>
 </div>
+<md-card class="example-card">
+	<md-card-header>
+		<div md-card-avatar class="example-header-image"></div>
+		<md-card-title>Shiba Inu</md-card-title>
+		<md-card-subtitle>Dog Breed</md-card-subtitle>
+	</md-card-header>
+	<img md-card-image src="assets/img/examples/shiba2.jpg">
+	<md-card-content>
+		<p>
+			The Shiba Inu is the smallest of the six original and distinct spitz breeds of dog from Japan.
+			A small, agile dog that copes very well with mountainous terrain, the Shiba Inu was originally
+			bred for hunting.
+		</p>
+	</md-card-content>
+	<md-card-actions>
+		<button md-button>LIKE</button>
+		<button md-button>SHARE</button>
+	</md-card-actions>
+</md-card>
