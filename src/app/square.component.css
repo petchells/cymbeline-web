@@ -3,8 +3,8 @@ div.sq {
     height: 56px;
     background-size: 56px;
     background-repeat: no-repeat;
-    transition: background 2s;
     margin: 4px;
+    transition: background 2s;
 }
 
 .sq.b {

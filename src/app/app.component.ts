@@ -1,8 +1,8 @@
 import { Component, Input } from '@angular/core';
-import {BoardService} from './board.service';
-import {MoveResponse} from './app.types';
-import {GameState} from './game';
-
+import { BoardService } from './board.service';
+import { MoveResponse } from './app.types';
+import { GameState } from './game';
+import { MdButtonModule, MdCheckboxModule, MdRadioModule } from '@angular/material';
 @Component({
 	selector: 'app-root',
 	templateUrl: './app.component.html',
@@ -36,6 +36,7 @@ export class AppComponent {
 		this.computerColour = this.computerToPlay ? 'b' : 'w';
 		this.draw = this.computerWins = this.humanWins = false;
 		this.gameInProgress = true;
+		console.log('game starting computer: ', this.computerColour);
 		if (this.computerToPlay) {
 			this.playComputerMove();
 		}
@@ -43,6 +44,10 @@ export class AppComponent {
 
 	public stopGame() {
 		this.gameInProgress = false;
+	}
+
+	public toggleHuman() {
+		this.humanColour = 'b' === this.humanColour ? 'w' : 'b';
 	}
 
 	public playHumanMove(x: number, y: number) {
@@ -98,6 +103,7 @@ export class AppComponent {
 		this.humanWins = (this.humanColour === 'b' && this.nrBlack > this.nrWhite) ||
 			(this.humanColour === 'w' && this.nrBlack < this.nrWhite);
 		this.computerWins = !this.humanWins;
+		this.toggleHuman();
 	}
 
 	private updateCounter() {

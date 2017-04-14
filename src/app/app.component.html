@@ -1,90 +1,99 @@
-<h1 xmlns="http://www.w3.org/1999/html">
-	{{title}}
-</h1>
-<table class="board">
-    <tr>
-        <td colspan="10" class="edge"></td>
-    </tr>
-	<tr *ngFor="let y of [0, 1, 2, 3, 4, 5, 6, 7]">
-        <td class="edge"></td>
-		<td *ngFor="let x of [0, 1, 2, 3, 4, 5, 6, 7]">
-			<app-sq x="{{x}}" y="{{y}}"></app-sq>
-		</td>
-        <td class="edge"></td>
-	</tr>
-    <tr>
-        <td colspan="10" class="edge"></td>
-    </tr>
-</table>
-<table class="brd" *ngIf="false">
-	<tbody>
-	<tr>
-		<td>
-		</td>
-		<td class="edge" *ngFor="let x of ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H']">
-			{{ x }}
-		</td>
-		<td>
-		</td>
-	</tr>
-	<tr *ngFor="let y of [0, 1, 2, 3, 4, 5, 6, 7]">
-		<td class="edge">
-			{{ y+1 }}
-		</td>
-		<td class="sq" *ngFor="let x of [0, 1, 2, 3, 4, 5, 6, 7]">
-			<app-sq x="{{x}}" y="{{y}}"></app-sq>
-		</td>
-		<td class="edge">
-			{{ y+1 }}
-		</td>
-	</tr>
-	<tr>
-		<td>
-		</td>
-		<td class="edge" *ngFor="let x of ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H']">
-			{{ x }}
-		</td>
-		<td>
-		</td>
-	</tr>
-	</tbody>
-</table>
-<div>
-	<form name="userInputForm">
-		Choose your colour:
-		<md-radio-button (clicked)="humanColour = 'b'" name="humanColour" [disabled]="gameInProgress" value="b">Black</md-radio-button>
-		<md-radio-button (clicked)="humanColour = 'w'" name="humanColour" [disabled]="gameInProgress" value="w">White</md-radio-button>
-		<br>
-		<button type="button" (click)="startGame()" [disabled]="gameInProgress">Start game</button>
-		<button type="button" (click)="stopGame()" [disabled]="!gameInProgress">Stop</button>
-		<span *ngIf="!gameInProgress">Game stopped</span>
-		<span *ngIf="gameInProgress && computerToPlay">Computer to play</span>
-		<span *ngIf="gameInProgress && !computerToPlay">Your turn</span>
-	</form>
-</div>
-<div class="score">
-	Black {{ nrBlack }}<br>
-	White {{ nrWhite }}<br>
-	<span *ngIf="humanWins">You won that one</span>
-	<span *ngIf="computerWins">I won</span>
-	<span *ngIf="draw">It's a draw</span>
-</div>
-<md-card class="example-card">
-	<md-card-header>
-		<div md-card-avatar class="example-header-image"></div>
-		<md-card-title>Shiba Inu</md-card-title>
-		<md-card-subtitle>Dog Breed</md-card-subtitle>
-	</md-card-header>
-	<img md-card-image src="assets/img/examples/shiba2.jpg">
+<md-card>
 	<md-card-content>
-		<p>
-			The Shiba Inu is the smallest of the six original and distinct spitz breeds of dog from Japan.
-			A small, agile dog that copes very well with mountainous terrain, the Shiba Inu was originally
-			bred for hunting.
-		</p>
+		<h1 xmlns="http://www.w3.org/1999/html">
+			{{title}}
+		</h1>
+	</md-card-content>
+</md-card>
+<md-card>
+	<md-card-content>
+		<table class="board">
+			<tr>
+				<td colspan="10" class="edge"></td>
+			</tr>
+			<tr *ngFor="let y of [0, 1, 2, 3, 4, 5, 6, 7]">
+				<td class="edge"></td>
+				<td *ngFor="let x of [0, 1, 2, 3, 4, 5, 6, 7]">
+					<app-sq x="{{x}}" y="{{y}}"></app-sq>
+				</td>
+				<td class="edge"></td>
+			</tr>
+			<tr>
+				<td colspan="10" class="edge"></td>
+			</tr>
+		</table>
+		<table class="brd" *ngIf="false">
+			<tbody>
+			<tr>
+				<td>
+				</td>
+				<td class="edge" *ngFor="let x of ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H']">
+					{{ x }}
+				</td>
+				<td>
+				</td>
+			</tr>
+			<tr *ngFor="let y of [0, 1, 2, 3, 4, 5, 6, 7]">
+				<td class="edge">
+					{{ y+1 }}
+				</td>
+				<td class="sq" *ngFor="let x of [0, 1, 2, 3, 4, 5, 6, 7]">
+					<app-sq x="{{x}}" y="{{y}}"></app-sq>
+				</td>
+				<td class="edge">
+					{{ y+1 }}
+				</td>
+			</tr>
+			<tr>
+				<td>
+				</td>
+				<td class="edge" *ngFor="let x of ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H']">
+					{{ x }}
+				</td>
+				<td>
+				</td>
+			</tr>
+			</tbody>
+		</table>
+	</md-card-content>
+</md-card>
+<md-card>
+	<md-card-header>
+		<md-card-title>
+			<span *ngIf="!gameInProgress">
+				Game stopped
+				<b *ngIf="humanWins">You won that one</b>
+				<b *ngIf="computerWins">I won</b>
+				<b *ngIf="draw">It's a draw</b>
+			</span>
+			<span *ngIf="gameInProgress && computerToPlay">Computer to play</span>
+			<span *ngIf="gameInProgress && !computerToPlay">Your turn</span>
+		</md-card-title>
+		<md-card-subtitle>
+			Black {{ nrBlack }} &mdash; White {{ nrWhite }}
+		</md-card-subtitle>
+	</md-card-header>
+	<md-card-content>
 	</md-card-content>
 	<md-card-actions>
-		<button md-button>LIKE</button>
-		<button md-button>SHARE</button>
+		<md-toolbar>
+			<span>
+						<md-slide-toggle
+										[color]="'primary'"
+										[checked]="humanColour === 'b'"
+										[disabled]="gameInProgress"
+										(change)="toggleHuman()">
+							<span *ngIf="humanColour !== 'w'">Play black</span>
+							<span *ngIf="humanColour === 'w'">Play white</span>
+						</md-slide-toggle>
+			</span>
+
+			<md-toolbar-row>
+				<span>
+		<button md-raised-button (click)="startGame()" [color]="'primary'" [disabled]="gameInProgress">Start game</button>
+		<button md-raised-button (click)="stopGame()" [color]="'warn'" [disabled]="!gameInProgress">Stop</button>
+				</span>
+			</md-toolbar-row>
+		</md-toolbar>
 	</md-card-actions>
 </md-card>

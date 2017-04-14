@@ -9,13 +9,11 @@
 
 table.board {
     background-image: url('../assets/Reversi-Board-only.svg');
-    background-size: 554px;
     background-repeat: no-repeat;
-    margin: 0;
+    background-size: 553px;
     padding: 0;
     border: 0;
-    margin-left: auto;
-    margin-right: auto;
+    margin: 0;
 }
 table.board tr {
     margin: 0;
@@ -25,12 +23,12 @@ table.board tr {
 table.board td {
     background: transparent;
     margin: 0;
-    padding: 0px;
+    padding: 0;
     border: 0;
 }
 table.board td.edge {
-    width: 11px;
-    height: 11px;
+    width: 10px;
+    height: 10px;
     margin: 0;
     padding: 0;
     border: 0;
