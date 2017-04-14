@@ -61,10 +61,10 @@
 	<md-card-header>
 		<md-card-title>
 			<span *ngIf="!gameInProgress">
-				Game stopped
 				<b *ngIf="humanWins">You won that one</b>
 				<b *ngIf="computerWins">I won</b>
 				<b *ngIf="draw">It's a draw</b>
+				&nbsp;
 			</span>
 			<span *ngIf="gameInProgress && computerToPlay">Computer to play</span>
 			<span *ngIf="gameInProgress && !computerToPlay">Your turn</span>
