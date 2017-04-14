@@ -59,8 +59,8 @@ table.board td {
     border: 0;
 }
 table.board td.edge {
-    width: 12px;
-    height: 12px;
+    width: 10px;
+    height: 10px;
     margin: 0;
     padding: 0;
     border: 0;
