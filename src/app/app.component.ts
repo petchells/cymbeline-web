@@ -12,10 +12,11 @@ export class AppComponent {
 	@Input() humanColour: string;
 
 	public title = 'Cymbeline';
+	public waiting = false;
+	public msg = 'start';
 	public gameInProgress = false;
 	public computerToPlay = false;
 	public computerColour: string;
-	public computerWins = false;
 	public humanWins = false;
 	public draw = false;
 	public nrBlack = 2;
@@ -32,18 +33,21 @@ export class AppComponent {
 
 	public startGame() {
 		this.game = new GameState();
-		this.computerToPlay = this.humanColour !== 'b';
-		this.computerColour = this.computerToPlay ? 'b' : 'w';
-		this.draw = this.computerWins = this.humanWins = false;
+		this.computerColour = this.humanColour !== 'b' ? 'b' : 'w';
+		this.draw = this.humanWins = false;
 		this.gameInProgress = true;
 		console.log('game starting computer: ', this.computerColour);
-		if (this.computerToPlay) {
+		if (this.humanColour !== 'b') {
+			this.msg = 'computerTurn';
 			this.playComputerMove();
+		} else {
+			this.msg = 'humanTurn';
 		}
 	}
 
 	public stopGame() {
 		this.gameInProgress = false;
+		this.msg = 'start';
 	}
 
 	public toggleHuman() {
@@ -51,33 +55,38 @@ export class AppComponent {
 	}
 
 	public playHumanMove(x: number, y: number) {
-		if (!this.gameInProgress || this.computerToPlay) {
+		if (!this.gameInProgress || this.waiting) {
 			return;
 		}
 		if (GameState.BOARD[x][y]) {
 			return;
 		}
+		this.waiting = true;
 		GameState.BOARD[x][y] = this.humanColour + 'x';
-		this.computerToPlay = true;
 		this.boardService.playMove(x, y, this.humanColour).then(
 			(data: MoveResponse) => {
 				if (data.turned) {
+					this.msg = 'computerTurn';
 					this.game.putMoveOnBoard(BoardService.coordToString(x, y), data.turned, this.humanColour);
 					this.updateCounter();
 					return setTimeout(() => {
+						this.waiting = false;
 						this.playComputerMove();
 					}, 2000);
 				} else {
-					this.computerToPlay = false;
+					this.msg = 'humanTurn';
 					GameState.BOARD[x][y] = '';
 				}
+				this.waiting = false;
 			}
 		);
 	}
 
 	private playComputerMove() {
+		this.waiting = true;
 		this.boardService.findBestMove(this.computerColour).then(
 			(data: MoveResponse) => {
+				this.waiting = false;
 				if (data.turned) {
 					this.game.putMoveOnBoard(data.played, data.turned, this.computerColour);
 					this.updateCounter();
@@ -87,7 +96,7 @@ export class AppComponent {
 					this.showWinner();
 					return;
 				}
-				this.computerToPlay = false;
+				this.msg = 'humanTurn';
 				this.nextValid = data.nextValid;
 				if (!data.nextValid) {
 					this.playComputerMove();
@@ -98,11 +107,12 @@ export class AppComponent {
 	private showWinner() {
 		if (this.nrBlack === this.nrWhite) {
 			this.draw = true;
+			this.msg = 'draw';
 			return;
 		}
-		this.humanWins = (this.humanColour === 'b' && this.nrBlack > this.nrWhite) ||
+		const humanWins = (this.humanColour === 'b' && this.nrBlack > this.nrWhite) ||
 			(this.humanColour === 'w' && this.nrBlack < this.nrWhite);
-		this.computerWins = !this.humanWins;
+		this.msg = this.humanWins ? 'humanWins' : 'computerWins';
 		this.toggleHuman();
 	}
 

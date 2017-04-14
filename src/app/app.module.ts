@@ -4,15 +4,17 @@ import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { MaterialModule } from '@angular/material';
-import { MdButtonModule, MdCheckboxModule, MdRadioModule } from '@angular/material';
+import { MdButtonModule, MdCheckboxModule, MdIconModule, MdRadioModule } from '@angular/material';
 
 import { AppComponent } from './app.component';
 import { SquareComponent } from './square.component';
 import { BoardService } from './board.service';
+import { IconRegistryComponent } from './icon.component';
 
 @NgModule({
 	declarations: [
 		AppComponent,
+		IconRegistryComponent,
 		SquareComponent
 	],
 	imports: [
@@ -21,6 +23,7 @@ import { BoardService } from './board.service';
 		FormsModule,
 		HttpModule,
 		MaterialModule,
+		MdIconModule,
 		MdRadioModule,
 		MdButtonModule,
 		MdCheckboxModule,

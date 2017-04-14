@@ -1,12 +1,5 @@
 <md-card>
 	<md-card-content>
-		<h1 xmlns="http://www.w3.org/1999/html">
-			{{title}}
-		</h1>
-	</md-card-content>
-</md-card>
-<md-card>
-	<md-card-content>
 		<table class="board">
 			<tr>
 				<td colspan="10" class="edge"></td>
@@ -27,17 +20,20 @@
 <md-card>
 	<md-card-header>
 		<md-card-title>
-			<span *ngIf="!gameInProgress">
-				<b *ngIf="humanWins">You won that one</b>
-				<b *ngIf="computerWins">I won</b>
-				<b *ngIf="draw">It's a draw</b>
-				&nbsp;
-			</span>
-			<span *ngIf="gameInProgress && computerToPlay">Computer to play</span>
-			<span *ngIf="gameInProgress && !computerToPlay">Your turn</span>
+			<div [ngSwitch]="msg">
+				<div *ngSwitchCase="'humanWins'">You won that one</div>
+				<div *ngSwitchCase="'computerWins'">I won</div>
+				<div *ngSwitchCase="'humanTurn'">Your turn</div>
+				<div *ngSwitchCase="'computerTurn'">Computer's turn</div>
+				<div *ngSwitchCase="'start'">Cymbeline &mdash; Choose a colour and press the start button to get going</div>
+			</div>
 		</md-card-title>
 		<md-card-subtitle>
-			Black {{ nrBlack }} &mdash; White {{ nrWhite }}
+			<md-icon svgIcon="black-piece"></md-icon>
+			{{ nrBlack }}
+			<md-icon svgIcon="white-piece"></md-icon>
+			{{ nrWhite }}
+			<app-icons></app-icons>
 		</md-card-subtitle>
 	</md-card-header>
 	<md-card-content>
@@ -45,20 +41,20 @@
 	<md-card-actions>
 		<md-toolbar>
 			<span>
-						<md-slide-toggle
-										[color]="'primary'"
-										[checked]="humanColour === 'b'"
-										[disabled]="gameInProgress"
-										(change)="toggleHuman()">
-							<span *ngIf="humanColour !== 'w'">Play black</span>
-							<span *ngIf="humanColour === 'w'">Play white</span>
-						</md-slide-toggle>
+				<md-slide-toggle
+								color="primary"
+								[checked]="humanColour === 'b'"
+								[disabled]="gameInProgress"
+								(change)="toggleHuman()">
+					<span *ngIf="humanColour !== 'w'">Black</span>
+					<span *ngIf="humanColour === 'w'">White</span>
+				</md-slide-toggle>
 			</span>
-
 			<md-toolbar-row>
 				<span>
-		<button md-raised-button (click)="startGame()" [color]="'primary'" [disabled]="gameInProgress">Start game</button>
-		<button md-raised-button (click)="stopGame()" [color]="'warn'" [disabled]="!gameInProgress">Stop</button>
+					<button md-raised-button (click)="startGame()" color="primary" [disabled]="gameInProgress">Start game
+					</button>
+					<button md-raised-button (click)="stopGame()" color="warn" [disabled]="!gameInProgress">Stop</button>
 				</span>
 			</md-toolbar-row>
 		</md-toolbar>
