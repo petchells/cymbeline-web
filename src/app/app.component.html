@@ -22,39 +22,6 @@
 				<td colspan="10" class="edge"></td>
 			</tr>
 		</table>
-		<table class="brd" *ngIf="false">
-			<tbody>
-			<tr>
-				<td>
-				</td>
-				<td class="edge" *ngFor="let x of ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H']">
-					{{ x }}
-				</td>
-				<td>
-				</td>
-			</tr>
-			<tr *ngFor="let y of [0, 1, 2, 3, 4, 5, 6, 7]">
-				<td class="edge">
-					{{ y+1 }}
-				</td>
-				<td class="sq" *ngFor="let x of [0, 1, 2, 3, 4, 5, 6, 7]">
-					<app-sq x="{{x}}" y="{{y}}"></app-sq>
-				</td>
-				<td class="edge">
-					{{ y+1 }}
-				</td>
-			</tr>
-			<tr>
-				<td>
-				</td>
-				<td class="edge" *ngFor="let x of ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H']">
-					{{ x }}
-				</td>
-				<td>
-				</td>
-			</tr>
-			</tbody>
-		</table>
 	</md-card-content>
 </md-card>
 <md-card>
