@@ -1,12 +1,3 @@
-.brd th, .brd td {
-    border: 0;
-    text-align: center;
-}
-
-.sq {
-    background: #373;
-}
-
 table.board {
     background-image: url('../assets/Reversi-Board-only.svg');
     background-repeat: no-repeat;
