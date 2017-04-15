@@ -13,8 +13,6 @@ div.sq {
 }
 
 .sq.bx {
-    transition: opacity 2s;
-    opacity: .7;
 }
 
 .sq.w {
@@ -23,6 +21,4 @@ div.sq {
 }
 
 .sq.wx {
-    transition: opacity 2s;
-    opacity: .7;
 }

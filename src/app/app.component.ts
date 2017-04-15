@@ -15,26 +15,23 @@ export class AppComponent {
 	public waiting = false;
 	public msg = 'start';
 	public gameInProgress = false;
-	public computerToPlay = false;
 	public computerColour: string;
-	public humanWins = false;
-	public draw = false;
 	public nrBlack = 2;
 	public nrWhite = 2;
 
-	public game = new GameState();
+	public game: GameState;
 	public board = GameState.BOARD;
 
 	private nextValid = '';
 
 	constructor(private boardService: BoardService) {
 		this.humanColour = 'b';
+		this.game = new GameState();
 	}
 
 	public startGame() {
 		this.game = new GameState();
 		this.computerColour = this.humanColour !== 'b' ? 'b' : 'w';
-		this.draw = this.humanWins = false;
 		this.gameInProgress = true;
 		console.log('game starting computer: ', this.computerColour);
 		if (this.humanColour !== 'b') {
@@ -106,13 +103,12 @@ export class AppComponent {
 
 	private showWinner() {
 		if (this.nrBlack === this.nrWhite) {
-			this.draw = true;
 			this.msg = 'draw';
 			return;
 		}
 		const humanWins = (this.humanColour === 'b' && this.nrBlack > this.nrWhite) ||
 			(this.humanColour === 'w' && this.nrBlack < this.nrWhite);
-		this.msg = this.humanWins ? 'humanWins' : 'computerWins';
+		this.msg = humanWins ? 'humanWins' : 'computerWins';
 		this.toggleHuman();
 	}
 

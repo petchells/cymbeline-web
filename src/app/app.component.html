@@ -18,48 +18,12 @@
 	</md-card-content>
 </md-card>
 <md-card>
-<<<<<<< HEAD
-    <md-card-header>
-        <md-card-title>
-			<span *ngIf="!gameInProgress">
-				<b *ngIf="humanWins">You won that one</b>
-				<b *ngIf="computerWins">I won</b>
-				<b *ngIf="draw">It's a draw</b>
-				&nbsp;
-			</span>
-            <span *ngIf="gameInProgress && computerToPlay">Computer to play</span>
-            <span *ngIf="gameInProgress && !computerToPlay">Your turn</span>
-        </md-card-title>
-        <md-card-subtitle>
-            Black <b>{{ nrBlack }}</b> &mdash; White <b>{{ nrWhite }}</b>
-        </md-card-subtitle>
-    </md-card-header>
-    <md-card-content>
-    </md-card-content>
-    <md-card-actions>
-        <md-toolbar>
-			<span>
-                <md-slide-toggle
-                        [color]="'primary'"
-                        [checked]="humanColour === 'b'"
-                        [disabled]="gameInProgress"
-                        (change)="toggleHuman()">
-                    <span *ngIf="humanColour !== 'w'">Play black</span>
-                    <span *ngIf="humanColour === 'w'">Play white</span>
-                </md-slide-toggle>
-			</span>
-            <md-toolbar-row>
-				<span>
-		            <button md-raised-button (click)="startGame()" [color]="'primary'" [disabled]="gameInProgress">Start
-                        game
-                    </button>
-		            <button md-raised-button (click)="stopGame()" [color]="'warn'" [disabled]="!gameInProgress">Stop</button>
-=======
 	<md-card-header>
 		<md-card-title>
 			<div [ngSwitch]="msg">
 				<div *ngSwitchCase="'humanWins'">You won that one</div>
 				<div *ngSwitchCase="'computerWins'">I won</div>
+				<div *ngSwitchCase="'draw'">Game drawn</div>
 				<div *ngSwitchCase="'humanTurn'">Your turn</div>
 				<div *ngSwitchCase="'computerTurn'">Computer's turn</div>
 				<div *ngSwitchCase="'start'">Cymbeline &mdash; Choose a colour and press the start button to get going</div>
@@ -92,7 +56,6 @@
 					<button md-raised-button (click)="startGame()" color="primary" [disabled]="gameInProgress">Start game
 					</button>
 					<button md-raised-button (click)="stopGame()" color="warn" [disabled]="!gameInProgress">Stop</button>
->>>>>>> cf07e4b62ef619aa029225da8d25b5d9e78c9f77
 				</span>
             </md-toolbar-row>
         </md-toolbar>
