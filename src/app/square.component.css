@@ -1,8 +1,9 @@
 div.sq {
-    width: 56px;
-    height: 56px;
-    background-size: 56px;
+    width: 40px;
+    height: 40px;
+    background-size: 100%;
     background-repeat: no-repeat;
+    background-position: center;
     margin: 4px;
     transition: background 2s;
 }

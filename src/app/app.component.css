@@ -1,7 +1,7 @@
 table.board {
     background-image: url('../assets/Reversi-Board-only.svg');
     background-repeat: no-repeat;
-    background-size: 553px;
+    background-size: 100%;
     padding: 0;
     border: 0;
     margin: 0;
@@ -18,8 +18,8 @@ table.board td {
     border: 0;
 }
 table.board td.edge {
-    width: 10px;
-    height: 10px;
+    width: 6px;
+    height: 6px;
     margin: 0;
     padding: 0;
     border: 0;
