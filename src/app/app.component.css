@@ -5,6 +5,7 @@ table.board {
     padding: 0;
     border: 0;
     margin: 0;
+    clear: both;
 }
 table.board tr {
     margin: 0;

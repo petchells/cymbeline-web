@@ -18,7 +18,7 @@ export class AppComponent {
 	public computerColour: string;
 	public nrBlack = 2;
 	public nrWhite = 2;
-
+	public blackToMove = true;
 	public game: GameState;
 	public board = GameState.BOARD;
 
@@ -33,13 +33,13 @@ export class AppComponent {
 		this.game = new GameState();
 		this.computerColour = this.humanColour !== 'b' ? 'b' : 'w';
 		this.gameInProgress = true;
-		console.log('game starting computer: ', this.computerColour);
 		if (this.humanColour !== 'b') {
 			this.msg = 'computerTurn';
 			this.playComputerMove();
 		} else {
 			this.msg = 'humanTurn';
 		}
+		this.blackToMove = true;;
 	}
 
 	public stopGame() {
@@ -64,6 +64,7 @@ export class AppComponent {
 			(data: MoveResponse) => {
 				if (data.turned) {
 					this.msg = 'computerTurn';
+					this.blackToMove = this.humanColour === 'w';
 					this.game.putMoveOnBoard(BoardService.coordToString(x, y), data.turned, this.humanColour);
 					this.updateCounter();
 					return setTimeout(() => {
@@ -72,6 +73,7 @@ export class AppComponent {
 					}, 2000);
 				} else {
 					this.msg = 'humanTurn';
+					this.blackToMove = this.humanColour === 'b';
 					GameState.BOARD[x][y] = '';
 				}
 				this.waiting = false;
@@ -94,6 +96,7 @@ export class AppComponent {
 					return;
 				}
 				this.msg = 'humanTurn';
+				this.blackToMove = this.humanColour === 'b';
 				this.nextValid = data.nextValid;
 				if (!data.nextValid) {
 					this.playComputerMove();
