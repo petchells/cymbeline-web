@@ -37,6 +37,22 @@ export class BoardService {
 		return {black, white};
 	}
 
+	static stringsToBoard(board: {black: string, white: string}) {
+		for (let i = 0; i < 8; i++) {
+			for (let j = 0; j < 8; j++) {
+				GameState.BOARD[i][j] = '';
+			}
+		}
+		for (let i = 0; i < board.black.length; i += 2) {
+			const pos = BoardService.stringToCoords(board.black.substr(i));
+			GameState[pos.x][pos.y] = 'b';
+		}
+		for (let i = 0; i < board.white.length; i += 2) {
+			const pos = BoardService.stringToCoords(board.white.substr(i));
+			GameState[pos.x][pos.y] = 'w';
+		}
+	}
+
 	constructor(private http: Http) {
 	}
 

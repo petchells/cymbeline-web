@@ -3,6 +3,7 @@ import { BoardService } from './board.service';
 import { MoveResponse } from './app.types';
 import { GameState } from './game';
 import { MdButtonModule, MdCheckboxModule, MdRadioModule } from '@angular/material';
+import {Move} from "./game";
 @Component({
 	selector: 'app-root',
 	templateUrl: './app.component.html',
@@ -26,12 +27,12 @@ export class AppComponent {
 
 	constructor(private boardService: BoardService) {
 		this.humanColour = 'b';
-		this.game = new GameState();
+		this.game = new GameState(this.humanColour);
 	}
 
 	public startGame() {
-		this.game = new GameState();
 		this.computerColour = this.humanColour !== 'b' ? 'b' : 'w';
+		this.game = new GameState(this.humanColour);
 		this.gameInProgress = true;
 		if (this.humanColour !== 'b') {
 			this.msg = 'computerTurn';
@@ -39,7 +40,7 @@ export class AppComponent {
 		} else {
 			this.msg = 'humanTurn';
 		}
-		this.blackToMove = true;;
+		this.blackToMove = true;
 	}
 
 	public stopGame() {
@@ -59,7 +60,7 @@ export class AppComponent {
 			return;
 		}
 		this.waiting = true;
-		GameState.BOARD[x][y] = this.humanColour + 'x';
+		this.board[x][y] = this.humanColour + 'x';
 		this.boardService.playMove(x, y, this.humanColour).then(
 			(data: MoveResponse) => {
 				if (data.turned) {
@@ -70,15 +71,19 @@ export class AppComponent {
 					return setTimeout(() => {
 						this.waiting = false;
 						this.playComputerMove();
-					}, 2000);
+					}, 1000);
 				} else {
 					this.msg = 'humanTurn';
 					this.blackToMove = this.humanColour === 'b';
-					GameState.BOARD[x][y] = '';
+					this.board[x][y] = '';
 				}
 				this.waiting = false;
 			}
 		);
+	}
+
+	public restorePosition(mv: Move) {
+		this.game.restorePosition(mv);
 	}
 
 	private playComputerMove() {

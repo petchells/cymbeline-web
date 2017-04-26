@@ -1,5 +1,13 @@
 import {BoardService} from './board.service';
 
+export class Move {
+	constructor(public x: number, public y: number, public colour: string, public board: {black: string, white: string}) {
+	}
+
+	public toString(): string {
+		return BoardService.coordToString(this.x, this.y);
+	}
+}
 export class GameState {
 	public static BOARD: string[][] = [
 		['', '', '', '', '', '', '', ''],
@@ -11,7 +19,9 @@ export class GameState {
 		['', '', '', '', '', '', '', ''],
 		['', '', '', '', '', '', '', '']];
 
-	constructor() {
+	public movelist: Move[] = [];
+
+	constructor(private humanColour: string) {
 		for (let i = 0; i < 8; i++) {
 			for (let j = 0; j < 8; j++) {
 				GameState.BOARD[i][j] = '';
@@ -35,5 +45,10 @@ export class GameState {
 			mv = BoardService.stringToCoords(moveStr);
 			GameState.BOARD[mv.x][mv.y] = colour;
 		}
+		this.movelist.push(new Move(mv.x, mv.y, colour, BoardService.boardToStrings()));
+	}
+
+	public restorePosition(mv: Move) {
+		BoardService.stringsToBoard(mv.board);
 	}
 }

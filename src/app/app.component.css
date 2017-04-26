@@ -2,7 +2,7 @@ table.board {
     background-image: url('../assets/Reversi-Board-only.svg');
     background-repeat: no-repeat;
     background-size: 100%;
-    padding: 0;
+    padding: 7px;
     border: 0;
     margin: 0;
     clear: both;
@@ -19,9 +19,23 @@ table.board td {
     border: 0;
 }
 table.board td.edge {
-    width: 6px;
-    height: 6px;
+    width: 0;
+    height: 0;
     margin: 0;
     padding: 0;
     border: 0;
+}
+.movelist {
+    background: gray;
+    overflow: hidden;
+    text-align: right;
+    margin: .2em;
+    padding: .2em;
+    border-radius: .2em;
+}
+.movelist .b {
+    color: black;
+}
+.movelist .w {
+    color: white;
 }
