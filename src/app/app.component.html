@@ -1,6 +1,6 @@
 <md-card>
 	<md-card-content>
-		<table class="board">
+		<table class="board" [ngClass]="{dim: waiting}">
 			<tr *ngFor="let y of [0, 1, 2, 3, 4, 5, 6, 7]">
 				<td *ngFor="let x of [0, 1, 2, 3, 4, 5, 6, 7]">
 					<app-sq x="{{x}}" y="{{y}}"></app-sq>
@@ -9,21 +9,16 @@
 		</table>
 		<div>
 			<md-chip-list class="mat-chip-list">
-				<md-chip color="accent" [selected]="blackToMove">
+				<md-chip color="accent" [selected]="blackToMove && gameInProgress">
 					<md-icon svgIcon="black-piece"></md-icon>
 					<b>{{ nrBlack }}</b>
 				</md-chip>
-				<md-chip color="accent" [selected]="!blackToMove">
+				<md-chip color="accent" [selected]="!blackToMove && gameInProgress">
 					<md-icon svgIcon="white-piece"></md-icon>
 					<b>{{ nrWhite }}</b>
 				</md-chip>
 			</md-chip-list>
 			<app-icons></app-icons>
-			<div class="movelist" *ngIf="game.movelist.length && showMovesPanel">
-				<span *ngFor="let mv of game.movelist" [ngClass]="mv.colour">
-					<span *ngIf="1">{{mv}}</span>
-				</span>
-			</div>
 		</div>
 		<div [ngSwitch]="msg">
 			<p *ngSwitchCase="'humanWins'">You won that one</p>
@@ -31,7 +26,14 @@
 			<p *ngSwitchCase="'draw'">Game drawn</p>
 			<p *ngSwitchCase="'humanTurn'">Your turn</p>
 			<p *ngSwitchCase="'computerTurn'">Computer's turn</p>
-			<p *ngSwitchCase="'start'">Cymbeline &mdash; Choose a colour and press the start button to get going</p>
+			<p *ngSwitchCase="'start'"><b>Cymbeline</b> &mdash; Choose a colour and press the start button to get going</p>
+		</div>
+		<div class="movelist" *ngIf="game.movelist.length && showMovesPanel">
+				<span *ngFor="let mv of game.movelist" [ngClass]="mv.colour">
+					<span style="cursor:pointer"
+					      title="Click to restore the position at this move"
+					      (click)="restorePosition(mv)">{{mv}}</span>
+				</span>
 		</div>
 	</md-card-content>
 	<md-card-actions>
@@ -44,16 +46,18 @@
 					<span *ngIf="humanColour === 'b'">Black</span>
 					<span *ngIf="humanColour !== 'b'">White</span>
 				</md-slide-toggle>
-				<md-checkbox (click)="showMovesPanel = !showMovesPanel">
-					Show moves
-				</md-checkbox>
+			</span>
+			<span>
+			<md-checkbox (click)="showMovesPanel = !showMovesPanel">
+				Show moves
+			</md-checkbox>
 			</span>
 			<md-toolbar-row>
 				<span>
 					<button md-raised-button
-									(click)="startGame()"
-									color="primary"
-									[disabled]="gameInProgress">
+					        (click)="startGame()"
+					        color="primary"
+					        [disabled]="gameInProgress">
 						Start game
 					</button>
 					<button md-raised-button

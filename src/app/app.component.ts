@@ -3,7 +3,8 @@ import { BoardService } from './board.service';
 import { MoveResponse } from './app.types';
 import { GameState } from './game';
 import { MdButtonModule, MdCheckboxModule, MdRadioModule } from '@angular/material';
-import {Move} from "./game";
+import {Move} from './game';
+
 @Component({
 	selector: 'app-root',
 	templateUrl: './app.component.html',
@@ -84,6 +85,23 @@ export class AppComponent {
 
 	public restorePosition(mv: Move) {
 		this.game.restorePosition(mv);
+		this.humanColour = this.game.humanColour;
+		this.computerColour = 'b' === this.humanColour ? 'w' : 'b';
+		this.updateCounter();
+		this.gameInProgress = true;
+		if (mv.colour === 'b') {
+			this.msg = this.humanColour === 'b' ? 'humanTurn' : 'computerTurn';
+			this.blackToMove = false;
+			if (this.computerColour === 'w') {
+				this.playComputerMove();
+			}
+		} else {
+			this.msg = this.humanColour === 'w' ? 'humanTurn' : 'computerTurn';
+			this.blackToMove = true;
+			if (this.computerColour === 'b') {
+				this.playComputerMove();
+			}
+		}
 	}
 
 	private playComputerMove() {

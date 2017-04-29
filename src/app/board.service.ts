@@ -45,11 +45,11 @@ export class BoardService {
 		}
 		for (let i = 0; i < board.black.length; i += 2) {
 			const pos = BoardService.stringToCoords(board.black.substr(i));
-			GameState[pos.x][pos.y] = 'b';
+			GameState.BOARD[pos.x][pos.y] = 'b';
 		}
 		for (let i = 0; i < board.white.length; i += 2) {
 			const pos = BoardService.stringToCoords(board.white.substr(i));
-			GameState[pos.x][pos.y] = 'w';
+			GameState.BOARD[pos.x][pos.y] = 'w';
 		}
 	}
 
@@ -65,7 +65,7 @@ export class BoardService {
 			position: BoardService.coordToString(x, y),
 		};
 		const qs = ['b=' + move.black, 'w=' + move.white, 'c=' + move.colour, 'p=' + move.position].join('&');
-		return this.http.get('http://localhost:8080/rpc/playMove?' + qs)
+		return this.http.get('http://localhost:8088/rpc/playMove?' + qs)
 			.toPromise()
 			.then(response => response.json() as MoveResponse)
 			.catch(BoardService.handleError);
@@ -74,7 +74,7 @@ export class BoardService {
 	public findBestMove(colour: string): Promise<MoveResponse> {
 		const board = BoardService.boardToStrings();
 		const qs = ['b=' + board.black, 'w=' + board.white, 'c=' + colour].join('&');
-		return this.http.get('http://localhost:8080/rpc/findBestMove?' + qs)
+		return this.http.get('http://localhost:8088/rpc/findBestMove?' + qs)
 			.toPromise()
 			.then(response => response.json() as MoveResponse)
 			.catch(BoardService.handleError);
